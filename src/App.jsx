@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Calendar, ArrowRight, ShieldCheck, Activity, Users, Menu, Building, HeartHandshake, Sparkles, User, CheckCircle, MessageSquare, Home, MessageCircle, Star } from 'lucide-react';
+import InteractiveClinics from './InteractiveClinics';
+
 
 // ==========================================
 // 🖼️ IMAGE CONFIGURATION
@@ -124,30 +126,6 @@ const TestimonialCard = ({ name, text }) => (
   </div>
 );
 
-const LocationCard = ({ city, phone, address }) => (
-  <motion.div 
-    variants={fadeInUp}
-    className="bg-white rounded-3xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-slate-100 hover:shadow-[0_15px_40px_rgba(11,128,166,0.15)] hover:-translate-y-1 transition duration-300 group flex flex-col"
-  >
-    <div className="h-32 w-full relative bg-slate-200 overflow-hidden">
-       {/* Pseudo-map aesthetic */}
-       <img src={IMAGES.mapTexture} className="w-full h-full object-cover opacity-[0.35] mix-blend-multiply group-hover:scale-105 transition-transform duration-700" alt="Map" loading="lazy" width="800" height="400" />
-       <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent" />
-       <div className="absolute bottom-4 right-4">
-         <div className="glass-orb bg-gradient-to-b from-[#b8cf25] to-[#8cb320] w-12 h-12 border-2 border-white shadow-lg group-hover:shadow-[0_0_15px_rgba(184,207,37,0.5)] transition-shadow">
-            <MapPin className="w-5 h-5 text-white relative z-10 drop-shadow-sm" />
-         </div>
-       </div>
-    </div>
-    <div className="p-6 pt-2 flex-grow flex flex-col">
-      <h3 className="text-xl font-bold text-[#084654] mb-2">{city}</h3>
-      <p className="text-slate-600 text-sm mb-4 flex-grow">{address}</p>
-      <a href={`tel:${phone.replace(/\D/g,'')}`} className="inline-flex items-center text-[#0b80a6] hover:text-[#065f7c] font-bold text-sm bg-[#0b80a6]/5 hover:bg-[#0b80a6]/10 px-4 py-2 rounded-full transition-colors w-max">
-        <Phone className="w-4 h-4 mr-2" /> {phone}
-      </a>
-    </div>
-  </motion.div>
-);
 
 const MobileDockItem = ({ icon: Icon, label }) => (
   <button 
@@ -515,20 +493,7 @@ export default function App() {
             <p className="text-slate-600 text-lg max-w-2xl mx-auto">Find a Care Plus clinic near you. We have 6 locations across the Metroplex ready to serve your recovery needs.</p>
           </div>
           
-          <motion.div 
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            <LocationCard city="Garland" phone="972.897.1784" address="1705 Beltline Rd. Garland, TX 75044" />
-            <LocationCard city="Irving" phone="972.600.9003" address="2940 N. O'Connor Rd Ste. 129, Irving, TX 75062" />
-            <LocationCard city="Mesquite" phone="214.242.9713" address="3815 N. Town East Blvd. Mesquite, TX 75150" />
-            <LocationCard city="Dallas" phone="214.272.9286" address="1011 S. Cockrell Hill Rd, Ste. 105, Dallas, TX 75211" />
-            <LocationCard city="Plano" phone="972.123.4567" address="Plano, TX (Central Area)" />
-            <LocationCard city="Fort Worth" phone="817.402.9484" address="Fort Worth, TX Area" />
-          </motion.div>
+          <InteractiveClinics mapTexture={IMAGES.mapTexture} />
         </div>
       </section>
 
