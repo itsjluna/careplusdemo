@@ -144,13 +144,16 @@ const TestimonialCard = ({ name, text }) => (
 );
 
 
-const MobileDockItem = ({ icon: Icon, label }) => (
+const MobileDockItem = ({ icon: Icon, label, isActive }) => (
   <button 
     className="flex flex-col items-center justify-center w-14 h-12 relative group active:scale-90 active:-translate-y-0.5 transition-transform duration-200"
   >
-    <div className="absolute inset-0 bg-white/0 group-hover:bg-white/20 rounded-xl transition-colors" />
-    <Icon className="w-5 h-5 text-medical-blue-900 drop-shadow-sm mb-0.5 relative z-10" />
-    <span className="text-[9px] font-bold text-medical-blue-950 relative z-10">{label}</span>
+    <div className={`absolute inset-0 rounded-xl transition-colors ${isActive ? 'bg-white/30 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8)]' : 'bg-white/0 group-hover:bg-white/20'}`} />
+    <Icon className={`w-5 h-5 drop-shadow-sm mb-0.5 relative z-10 ${isActive ? 'text-[#084654]' : 'text-[#084654]/60'}`} />
+    <span className={`text-[9px] font-bold relative z-10 ${isActive ? 'text-[#084654]' : 'text-[#084654]/60'}`}>{label}</span>
+    {isActive && (
+      <div className="absolute -bottom-1.5 w-1.5 h-1.5 bg-[#8cb320] rounded-full shadow-[0_0_8px_2px_rgba(140,179,32,0.8)]" />
+    )}
   </button>
 );
 
@@ -213,7 +216,7 @@ export default function App() {
          <div className="bg-white/40 backdrop-blur-3xl border border-white/70 rounded-[2rem] p-2 flex justify-between items-center shadow-[0_20px_50px_rgba(0,0,0,0.2),inset_0_2px_5px_rgba(255,255,255,0.9)] relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/60 to-transparent rounded-t-[2rem] pointer-events-none" />
             
-            <MobileDockItem icon={Home} label={t("Home", "Inicio")} />
+            <MobileDockItem icon={Home} label={t("Home", "Inicio")} isActive={true} />
             <MobileDockItem icon={Activity} label={t("Services", "Servicios")} />
             <MobileDockItem icon={Users} label={t("Team", "Equipo")} />
             <MobileDockItem icon={MapPin} label={t("Locations", "Clínicas")} />
@@ -270,15 +273,6 @@ export default function App() {
                     decoding="async"
                     className="rounded-[1.5rem] opacity-100 object-cover h-[300px] sm:h-[400px] w-full"
                   />
-                  <div className="absolute -bottom-4 left-4 z-30 bg-white/90 backdrop-blur-xl p-2 pr-6 rounded-full flex items-center space-x-3 shadow-[0_10px_20px_rgba(0,0,0,0.2)] border-2 border-white">
-                    <div className="glass-orb bg-gradient-to-b from-[#ff9a3d] to-[#ea580c] w-10 h-10 shadow-sm flex-shrink-0">
-                      <ShieldCheck className="w-5 h-5 text-white z-10 relative drop-shadow-md" strokeWidth={2.5} />
-                    </div>
-                    <div className="flex flex-col justify-center text-left">
-                      <p className="text-[#084654] font-extrabold uppercase tracking-wide text-[10px] leading-tight">No Insurance Needed</p>
-                      <p className="text-[#ea580c] text-[10px] font-bold leading-tight">Low Self-Pay Cost</p>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -299,6 +293,28 @@ export default function App() {
                     <Phone className="w-5 h-5 text-white mr-2 drop-shadow-sm" /> (800) 123-4567
                   </span>
                 </button>
+              </div>
+
+              {/* MOBILE ONLY EXTRACTED BADGES */}
+              <div className="lg:hidden w-full flex flex-col space-y-3 mt-6 px-2">
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 flex items-center shadow-lg border border-white/20">
+                  <div className="glass-orb bg-gradient-to-b from-[#ff9a3d] to-[#ea580c] w-12 h-12 flex items-center justify-center mr-4 shadow-sm flex-shrink-0">
+                    <ShieldCheck className="w-6 h-6 text-white drop-shadow-md z-10 relative" />
+                  </div>
+                  <div className="text-left flex-1">
+                    <p className="text-white font-extrabold uppercase tracking-wide text-[12px] leading-tight">{t('No Insurance Needed', 'No se requiere seguro')}</p>
+                    <p className="text-[#ff9a3d] text-[11px] font-bold mt-0.5">{t('Low Self-Pay Cost', 'Bajo Costo Directo')}</p>
+                  </div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 flex items-center shadow-lg border border-white/20">
+                  <div className="glass-orb bg-gradient-to-b from-[#b8cf25] to-[#8cb320] w-12 h-12 flex items-center justify-center mr-4 shadow-sm flex-shrink-0">
+                    <Users className="w-6 h-6 text-white drop-shadow-md z-10 relative" />
+                  </div>
+                  <div className="text-left flex-1">
+                    <p className="text-white font-extrabold uppercase tracking-wide text-[12px] leading-tight">{t('Bilingual Staff', 'Personal Bilingüe')}</p>
+                    <p className="text-[#b8cf25] text-[11px] font-bold mt-0.5">{t('Hablamos Español', 'We Speak Spanish')}</p>
+                  </div>
+                </div>
               </div>
 
               {/* Trust & Credibility Bar */}
@@ -376,13 +392,20 @@ export default function App() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="flex lg:grid lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-8 -mx-4 px-4 sm:mx-0 sm:px-0"
         >
-          <QuickService icon={Activity} title={t("Spine & Joint", "Columna y Articulaciones")} desc={t("Targeted therapy for back and joint pain.", "Terapia para dolor de espalda y articulaciones.")} />
-          <QuickService icon={Users} title={t("Sports & Family", "Deportes y Familia")} desc={t("Care for athletes and everyday wellness.", "Cuidado para atletas y bienestar diario.")} />
-          <QuickService icon={Activity} title={t("Auto Accidents", "Accidentes de Auto")} desc={t("Whiplash and trauma recovery programs.", "Programas de recuperación de latigazo y trauma.")} />
-          <QuickService icon={ShieldCheck} title={t("Work Injuries", "Lesiones de Trabajo")} desc={t("Rehabilitation to get you back to work safely.", "Rehabilitación para regresar al trabajo a salvo.")} />
+          <QuickService className="min-w-[85vw] sm:min-w-[45vw] lg:min-w-0 snap-center" icon={Activity} title={t("Spine & Joint", "Columna y Articulaciones")} desc={t("Targeted therapy for back and joint pain.", "Terapia para dolor de espalda y articulaciones.")} />
+          <QuickService className="min-w-[85vw] sm:min-w-[45vw] lg:min-w-0 snap-center" icon={Users} title={t("Sports & Family", "Deportes y Familia")} desc={t("Care for athletes and everyday wellness.", "Cuidado para atletas y bienestar diario.")} />
+          <QuickService className="min-w-[85vw] sm:min-w-[45vw] lg:min-w-0 snap-center" icon={Activity} title={t("Auto Accidents", "Accidentes de Auto")} desc={t("Whiplash and trauma recovery programs.", "Programas de recuperación de latigazo y trauma.")} />
+          <QuickService className="min-w-[85vw] sm:min-w-[45vw] lg:min-w-0 snap-center" icon={ShieldCheck} title={t("Work Injuries", "Lesiones de Trabajo")} desc={t("Rehabilitation to get you back to work safely.", "Rehabilitación para regresar al trabajo a salvo.")} />
         </motion.div>
+        
+        {/* Mobile Swipe Hint */}
+        <div className="lg:hidden flex justify-center -mt-2 mb-4">
+           <p className="text-[10px] text-white/50 font-bold uppercase tracking-widest flex items-center">
+             ← {t('Swipe to see more', 'Desliza para ver más')} →
+           </p>
+        </div>
       </section>
 
       {/* Office Highlights Section */}
@@ -541,12 +564,12 @@ export default function App() {
               <div className="bg-white rounded-[2rem] p-8 shadow-[0_15px_40px_rgba(0,0,0,0.05)] border-[3px] border-white relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-slate-50 z-0" />
                 <form className="space-y-4 relative z-10" onSubmit={(e) => e.preventDefault()}>
-                  <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder={t("First Name", "Nombre")} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 font-medium placeholder-slate-400 shadow-inner" />
-                    <input type="text" placeholder={t("Last Name", "Apellido")} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 font-medium placeholder-slate-400 shadow-inner" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input type="text" placeholder={t("First Name", "Nombre")} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 text-base font-medium placeholder-slate-400 shadow-inner" />
+                    <input type="text" placeholder={t("Last Name", "Apellido")} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 text-base font-medium placeholder-slate-400 shadow-inner" />
                   </div>
-                  <input type="tel" placeholder={t("Phone Number", "Número de Teléfono")} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 font-medium placeholder-slate-400 shadow-inner" />
-                  <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-500 font-medium shadow-inner appearance-none cursor-pointer">
+                  <input type="tel" placeholder={t("Phone Number", "Número de Teléfono")} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 text-base font-medium placeholder-slate-400 shadow-inner" />
+                  <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-500 text-base font-medium shadow-inner appearance-none cursor-pointer">
                     <option value="">{t('What do you need help with?', '¿En qué necesita ayuda?')}</option>
                     <option value="auto">{t('Auto Accident Injury', 'Lesión por Accidente de Auto')}</option>
                     <option value="work">{t('Work Injury', 'Lesión de Trabajo')}</option>
