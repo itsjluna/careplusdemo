@@ -26,7 +26,6 @@ const LanguageToggle = () => {
 // update these paths (e.g., changed to '/my-custom-hero.jpg')
 // ==========================================
 const IMAGES = {
-  parallaxBg: "/parallax-bg.jpg",
   heroDoctor: "/hero-doctor.jpg",
   clinicOffice: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800",
   customerCare: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
@@ -167,12 +166,7 @@ export default function App() {
 
   return (
     <>
-    <div className="min-h-screen selection:bg-healing-green-400 selection:text-white font-sans overflow-x-hidden relative">
-      {/* Fixed Frutiger Parallax Background */}
-      <div 
-        className="fixed inset-0 z-[-1] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${IMAGES.parallaxBg})` }}
-      />
+    <div className="min-h-screen bg-white selection:bg-healing-green-400 selection:text-white font-sans overflow-x-hidden">
       {/* Desktop Nav (Hidden on Mobile) */}
       <nav className="hidden md:block fixed w-full z-50 transition-all duration-500 ease-out top-6 px-6 pointer-events-none">
          <div className={`mx-auto pointer-events-auto transition-all duration-500 ease-out flex items-center justify-between rounded-full border ${
@@ -390,7 +384,7 @@ export default function App() {
       </section>
 
       {/* Office Highlights Section */}
-      <section className="py-24 my-8 mx-4 sm:mx-6 lg:mx-8 bg-white/70 backdrop-blur-3xl relative overflow-hidden border-[3px] border-white/60 shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-[3rem]">
+      <section className="py-24 bg-white relative overflow-hidden">
         {/* Ambient Light Bleed */}
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#0ea5e9]/10 rounded-full blur-[120px] -z-10 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[#34d399]/10 rounded-full blur-[120px] -z-10 -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
@@ -415,7 +409,7 @@ export default function App() {
       </section>
 
       {/* About/Trust Section */}
-      <section className="py-24 my-8 mx-4 sm:mx-6 lg:mx-8 bg-white/70 backdrop-blur-3xl relative overflow-hidden border-[3px] border-white/60 shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-[3rem]">
+      <section className="py-24 bg-white relative overflow-hidden border-t border-slate-200">
         {/* Richer Ambient Light Bleed */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#10b981]/10 rounded-full blur-[120px] -z-10 translate-x-1/4 -translate-y-1/4 pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-[#0ea5e9]/10 rounded-full blur-[120px] -z-10 -translate-x-1/4 translate-y-1/4 pointer-events-none"></div>
@@ -475,7 +469,7 @@ export default function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 my-8 mx-4 sm:mx-6 lg:mx-8 bg-white/70 backdrop-blur-3xl relative overflow-hidden border-[3px] border-white/60 shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-[3rem]">
+      <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <h2 className="text-3xl font-extrabold text-[#084654] mb-10">{t('Patient Success Stories', 'Historias de Éxito de Pacientes')}</h2>
@@ -507,7 +501,7 @@ export default function App() {
       </section>
 
       {/* Locations */}
-      <section className="py-24 my-8 mx-4 sm:mx-6 lg:mx-8 bg-white/70 backdrop-blur-3xl relative overflow-hidden border-[3px] border-white/60 shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-[3rem]">
+      <section className="py-24 bg-white relative overflow-hidden border-t border-slate-200">
         {/* Ambient Light Bleed */}
         <div className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] bg-[#34d399]/5 rounded-full blur-[150px] -z-10 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
 
@@ -522,7 +516,7 @@ export default function App() {
       </section>
 
       {/* NEW: Lead Capture Form Section */}
-      <section className="py-24 my-8 mx-4 sm:mx-6 lg:mx-8 bg-white/70 backdrop-blur-3xl relative overflow-hidden border-[3px] border-white/60 shadow-[0_20px_60px_rgba(0,0,0,0.1)] rounded-[3rem]">
+      <section className="py-24 bg-white relative overflow-hidden border-t border-slate-200">
         
         {/* Richer Ambient Light Bleed */}
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#f97316]/10 rounded-full blur-[120px] -z-10 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
