@@ -247,7 +247,7 @@ export default function App() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-56 lg:pb-48 overflow-hidden bg-slate-900">
+      <section className="relative pt-32 pb-96 lg:pb-48 overflow-hidden bg-slate-900">
         <VistaAuroraBackground />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
@@ -387,7 +387,7 @@ export default function App() {
       </section>
 
       {/* Services Flat Grid */}
-      <section className="relative z-30 -mt-32 lg:-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative z-30 -mt-80 lg:-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="sr-only">Our Core Services</h2>
         <motion.div 
           ref={servicesRef}
