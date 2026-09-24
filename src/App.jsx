@@ -150,14 +150,13 @@ const LocationCard = ({ city, phone, address }) => (
 );
 
 const MobileDockItem = ({ icon: Icon, label }) => (
-  <motion.button 
-    whileTap={{ scale: 0.9, y: -2 }}
-    className="flex flex-col items-center justify-center w-14 h-12 relative group"
+  <button 
+    className="flex flex-col items-center justify-center w-14 h-12 relative group active:scale-90 active:-translate-y-0.5 transition-transform duration-200"
   >
     <div className="absolute inset-0 bg-white/0 group-hover:bg-white/20 rounded-xl transition-colors" />
     <Icon className="w-5 h-5 text-medical-blue-900 drop-shadow-sm mb-0.5 relative z-10" />
     <span className="text-[9px] font-bold text-medical-blue-950 relative z-10">{label}</span>
-  </motion.button>
+  </button>
 );
 
 export default function App() {
@@ -178,8 +177,8 @@ export default function App() {
       <nav className="hidden md:block fixed w-full z-50 transition-all duration-500 ease-out top-6 px-6 pointer-events-none">
          <div className={`mx-auto pointer-events-auto transition-all duration-500 ease-out flex items-center justify-between rounded-full border ${
            isScrolled 
-             ? 'max-w-4xl bg-gradient-to-b from-white/90 to-white/70 backdrop-blur-2xl shadow-[0_20px_40px_rgba(0,0,0,0.15),inset_0_2px_5px_rgba(255,255,255,1)] border-[2px] border-white h-16 px-6' 
-             : 'max-w-7xl bg-gradient-to-b from-white/50 to-white/20 backdrop-blur-2xl shadow-[0_15px_40px_rgba(0,0,0,0.1),inset_0_2px_5px_rgba(255,255,255,0.9)] border-[2px] border-white/70 h-20 px-10'
+             ? 'max-w-4xl bg-white/70 backdrop-blur-2xl shadow-[0_15px_40px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,1)] border-white/70 h-16 px-6' 
+             : 'max-w-7xl bg-white/40 backdrop-blur-lg shadow-[0_8px_30px_rgba(0,0,0,0.08),inset_0_1px_1px_rgba(255,255,255,0.8)] border-white/40 h-20 px-10'
          }`}>
             {/* Logo */}
             <div className="flex items-center space-x-2">
@@ -191,13 +190,11 @@ export default function App() {
               <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">Our Team</a>
               <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">Locations</a>
               <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">Testimonials</a>
-              <motion.button 
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }}
-                className={`btn-aero-orange rounded-full flex shadow-md transition-all duration-300 ${isScrolled ? 'px-5 py-2 text-sm' : 'px-6 py-2.5 text-base'}`}
+              <button 
+                className={`btn-aero-orange rounded-full flex shadow-md hover:scale-105 active:scale-95 transition-all duration-300 ${isScrolled ? 'px-5 py-2 text-sm' : 'px-6 py-2.5 text-base'}`}
               >
                 <span className="relative z-10 flex items-center justify-center w-full">Call Now</span>
-              </motion.button>
+              </button>
             </div>
          </div>
       </nav>
@@ -215,7 +212,7 @@ export default function App() {
       
       {/* Mobile Bottom Dock */}
       <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[360px]">
-         <div className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-3xl border-[2px] border-white rounded-[2rem] p-2 flex justify-between items-center shadow-[0_20px_50px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)] relative overflow-hidden">
+         <div className="bg-white/40 backdrop-blur-3xl border border-white/70 rounded-[2rem] p-2 flex justify-between items-center shadow-[0_20px_50px_rgba(0,0,0,0.2),inset_0_2px_5px_rgba(255,255,255,0.9)] relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/60 to-transparent rounded-t-[2rem] pointer-events-none" />
             
             <MobileDockItem icon={Home} label="Home" />
@@ -223,12 +220,11 @@ export default function App() {
             <MobileDockItem icon={Users} label="Team" />
             <MobileDockItem icon={MapPin} label="Locations" />
             
-            <motion.button 
-              whileTap={{ scale: 0.9 }}
-              className="w-12 h-12 rounded-full btn-aero-orange flex items-center justify-center border border-white/50 shadow-lg ml-1 flex-shrink-0"
+            <button 
+              className="w-12 h-12 rounded-full btn-aero-orange flex items-center justify-center border border-white/50 shadow-lg ml-1 flex-shrink-0 active:scale-90 transition-transform duration-200"
             >
                <Phone className="w-5 h-5 text-white relative z-10" />
-            </motion.button>
+            </button>
          </div>
       </div>
 
@@ -272,6 +268,8 @@ export default function App() {
                     alt="Medical professional examining patient" 
                     width="800"
                     height="500"
+                    fetchpriority="high"
+                    decoding="async"
                     className="rounded-[1.5rem] opacity-100 object-cover h-[300px] sm:h-[400px] w-full"
                   />
                   <div className="absolute -bottom-4 left-4 z-30 bg-white/90 backdrop-blur-xl p-2 pr-6 rounded-full flex items-center space-x-3 shadow-[0_10px_20px_rgba(0,0,0,0.2)] border-2 border-white">
@@ -342,6 +340,8 @@ export default function App() {
                   alt="Medical professional examining patient" 
                   width="1000"
                   height="600"
+                  fetchpriority="high"
+                  decoding="async"
                   className="rounded-[2.5rem] opacity-100 object-cover h-[550px] w-full relative z-0"
                 />
                 
