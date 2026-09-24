@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Phone, Calendar, ArrowRight, ShieldCheck, Activity, Users, Menu, Building, HeartHandshake, Sparkles, User, CheckCircle, MessageSquare, Home, MessageCircle, Star } from 'lucide-react';
 import InteractiveClinics from './InteractiveClinics';
 import { LanguageContext } from './LanguageContext';
+import AtmosphericParticles from './AtmosphericParticles';
 
 const LanguageToggle = () => {
   const { lang, toggleLanguage } = React.useContext(LanguageContext);
@@ -227,6 +228,7 @@ export default function App() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-48 overflow-hidden bg-slate-900">
         <VistaAuroraBackground />
+        <AtmosphericParticles />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -350,15 +352,15 @@ export default function App() {
                     <ShieldCheck className="w-8 h-8 text-white drop-shadow-lg z-10 relative" strokeWidth={2.5} />
                   </div>
                   <div className="flex flex-col justify-center">
-                    <p className="text-[#084654] font-extrabold uppercase tracking-wide text-[14px] leading-tight drop-shadow-sm">No Insurance Needed</p>
-                    <p className="text-[#ea580c] text-[14px] font-bold leading-tight mt-0.5">Low Self-Pay Cost</p>
+                    <p className="text-[#084654] font-extrabold uppercase tracking-wide text-[14px] leading-tight drop-shadow-sm">{t('No Insurance Needed', 'No se requiere seguro')}</p>
+                    <p className="text-[#ea580c] text-[14px] font-bold leading-tight mt-0.5">{t('Low Self-Pay Cost', 'Bajo Costo de Pago Directo')}</p>
                   </div>
                 </div>
 
                 {/* Optional Second Badge for Balance */}
                 <div className="absolute top-10 -right-6 z-30 bg-white/90 backdrop-blur-xl px-6 py-3 rounded-full flex items-center shadow-[0_15px_30px_rgba(0,0,0,0.2)] border-2 border-white hover:-translate-y-1 hover:scale-105 transition-all duration-300 cursor-default">
                   <Users className="w-5 h-5 text-[#8cb320] mr-2" />
-                  <span className="text-[#084654] font-bold text-sm tracking-wide">Bilingual Staff</span>
+                  <span className="text-[#084654] font-bold text-sm tracking-wide">{t('Bilingual Staff', 'Personal Bilingüe')}</span>
                 </div>
               </div>
             </motion.div>
@@ -376,10 +378,10 @@ export default function App() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          <QuickService icon={Activity} title="Spine & Joint" desc="Targeted therapy for back and joint pain." />
-          <QuickService icon={Users} title="Sports & Family" desc="Care for athletes and everyday wellness." />
-          <QuickService icon={Activity} title="Auto Accidents" desc="Whiplash and trauma recovery programs." />
-          <QuickService icon={ShieldCheck} title="Work Injuries" desc="Rehabilitation to get you back to work safely." />
+          <QuickService icon={Activity} title={t("Spine & Joint", "Columna y Articulaciones")} desc={t("Targeted therapy for back and joint pain.", "Terapia para dolor de espalda y articulaciones.")} />
+          <QuickService icon={Users} title={t("Sports & Family", "Deportes y Familia")} desc={t("Care for athletes and everyday wellness.", "Cuidado para atletas y bienestar diario.")} />
+          <QuickService icon={Activity} title={t("Auto Accidents", "Accidentes de Auto")} desc={t("Whiplash and trauma recovery programs.", "Programas de recuperación de latigazo y trauma.")} />
+          <QuickService icon={ShieldCheck} title={t("Work Injuries", "Lesiones de Trabajo")} desc={t("Rehabilitation to get you back to work safely.", "Rehabilitación para regresar al trabajo a salvo.")} />
         </motion.div>
       </section>
 
@@ -391,8 +393,8 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#084654] via-[#0b80a6] to-[#0ea5e9] mb-4">Experience the Care Plus Difference</h2>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto">State-of-the-art facilities paired with compassionate, expert care.</p>
+            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#084654] via-[#0b80a6] to-[#0ea5e9] mb-4">{t('Experience the Care Plus Difference', 'Experimente la Diferencia Care Plus')}</h2>
+            <p className="text-slate-600 text-lg max-w-2xl mx-auto">{t('State-of-the-art facilities paired with compassionate, expert care.', 'Instalaciones de última generación combinadas con cuidado experto y compasivo.')}</p>
           </div>
           <motion.div 
             variants={staggerContainer}
@@ -401,9 +403,9 @@ export default function App() {
             viewport={{ once: true }}
             className="grid md:grid-cols-3 gap-10"
           >
-            <HighlightFeature title="Our Office" icon={Building} img={IMAGES.clinicOffice} />
-            <HighlightFeature title="Customer Care" icon={HeartHandshake} img={IMAGES.customerCare} />
-            <HighlightFeature title="The Right Therapy" icon={Sparkles} img={IMAGES.therapy} />
+            <HighlightFeature title={t('Our Office', 'Nuestra Clínica')} icon={Building} img={IMAGES.clinicOffice} />
+            <HighlightFeature title={t('Customer Care', 'Atención al Cliente')} icon={HeartHandshake} img={IMAGES.customerCare} />
+            <HighlightFeature title={t('The Right Therapy', 'La Terapia Correcta')} icon={Sparkles} img={IMAGES.therapy} />
           </motion.div>
         </div>
       </section>
@@ -427,7 +429,7 @@ export default function App() {
                 <img src={IMAGES.doctorBio} alt="Doctor" loading="lazy" width="800" height="800" className="w-full h-auto object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-medical-blue-950/90 via-medical-blue-950/20 to-transparent pointer-events-none" />
                 <div className="absolute bottom-0 left-0 p-10">
-                  <p className="text-[#c7d825] font-bold tracking-wide uppercase text-sm mb-2 drop-shadow-sm">Lead Chiropractor</p>
+                  <p className="text-[#c7d825] font-bold tracking-wide uppercase text-sm mb-2 drop-shadow-sm">{t('Lead Chiropractor', 'Quiropráctico Principal')}</p>
                   <h3 className="text-4xl font-extrabold text-white drop-shadow-md">Dr. David Gianino</h3>
                 </div>
               </div>
@@ -439,16 +441,16 @@ export default function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
             >
-              <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#084654] via-[#0b80a6] to-[#0ea5e9] mb-6">Meet Our Expert Team</h2>
+              <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#084654] via-[#0b80a6] to-[#0ea5e9] mb-6">{t('Meet Our Expert Team', 'Conoce a Nuestro Equipo Experto')}</h2>
               <p className="text-slate-600 text-lg mb-8 leading-relaxed">
-                Dedicated to providing personalized care, our doctors use state-of-the-art techniques to restore mobility and alleviate pain. Whether you've suffered an injury on the job, in a vehicle, or just dealing with chronic discomfort, we are here to help you regain your life.
+                {t("Dedicated to providing personalized care, our doctors use state-of-the-art techniques to restore mobility and alleviate pain. Whether you've suffered an injury on the job, in a vehicle, or just dealing with chronic discomfort, we are here to help you regain your life.", "Dedicados a brindar atención personalizada, nuestros doctores utilizan técnicas de vanguardia para restaurar la movilidad y aliviar el dolor. Ya sea que haya sufrido una lesión en el trabajo, en un vehículo o simplemente esté lidiando con dolor crónico, estamos aquí para ayudarle a recuperar su vida.")}
               </p>
               <ul className="space-y-5 mb-10">
                 {[
-                  'Comprehensive Injury Assessments',
-                  'Personalized Rehabilitation Plans',
-                  'Bilingual Staff (Spanish & English)',
-                  'Same-Day Appointments Available'
+                  t('Comprehensive Injury Assessments', 'Evaluaciones Integrales de Lesiones'),
+                  t('Personalized Rehabilitation Plans', 'Planes de Rehabilitación Personalizados'),
+                  t('Bilingual Staff (Spanish & English)', 'Personal Bilingüe (Español e Inglés)'),
+                  t('Same-Day Appointments Available', 'Citas Disponibles el Mismo Día')
                 ].map((item, i) => (
                   <li key={i} className="flex items-center text-medical-blue-900 font-semibold cursor-pointer group text-lg">
                     <div className="glass-orb bg-gradient-to-b from-[#b8cf25] to-[#8cb320] w-7 h-7 mr-4 border border-[#d6eb75] flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-sm">
@@ -460,7 +462,7 @@ export default function App() {
               </ul>
               <button className="btn-aero-glass !text-[#084654] !border-[#084654]/20 !bg-white/50 px-6 py-3 rounded-full flex items-center group shadow-sm hover:shadow-md transition-shadow">
                 <span className="relative z-10 flex items-center">
-                  Read Full Bio <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  {t('Read Full Bio', 'Leer Biografía Completa')} <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                 </span>
               </button>
             </motion.div>
@@ -472,15 +474,15 @@ export default function App() {
       <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <h2 className="text-3xl font-extrabold text-[#084654] mb-10">Patient Success Stories</h2>
+            <h2 className="text-3xl font-extrabold text-[#084654] mb-10">{t('Patient Success Stories', 'Historias de Éxito de Pacientes')}</h2>
             <div className="grid sm:grid-cols-2 gap-8 pt-4">
                <TestimonialCard 
                  name="Sarah Jenkins" 
-                 text="After my auto accident, I was in constant pain. The team at Care Plus not only relieved my back pain but guided me through the entire rehabilitation process. Highly recommended!"
+                 text={t("After my auto accident, I was in constant pain. The team at Care Plus not only relieved my back pain but guided me through the entire rehabilitation process. Highly recommended!", "Después de mi accidente automovilístico, sentía un dolor constante. El equipo de Care Plus no solo alivió mi dolor, sino que me guió durante toda la rehabilitación. ¡Muy recomendados!")}
                />
                <TestimonialCard 
                  name="Michael Ramirez" 
-                 text="Professional, bilingual, and incredibly effective. I suffered a slip and fall at work and they helped me get back on my feet faster than I ever expected. A true lifesaver."
+                 text={t("Professional, bilingual, and incredibly effective. I suffered a slip and fall at work and they helped me get back on my feet faster than I ever expected. A true lifesaver.", "Profesionales, bilingües e increíblemente efectivos. Sufrí una caída en el trabajo y me ayudaron a recuperarme más rápido de lo que esperaba. Un verdadero salvavidas.")}
                />
             </div>
           </div>
@@ -489,12 +491,12 @@ export default function App() {
             <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/20 rounded-full blur-[50px] pointer-events-none" />
             <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-black/20 rounded-full blur-[50px] pointer-events-none" />
             
-            <h3 className="text-3xl font-extrabold mb-4 drop-shadow-md relative z-10 leading-tight">See What More Clients Are Saying</h3>
-            <p className="text-white/90 font-medium mb-8 relative z-10">Join thousands of recovered patients across the DFW Metroplex.</p>
+            <h3 className="text-3xl font-extrabold mb-4 drop-shadow-md relative z-10 leading-tight">{t('See What More Clients Are Saying', 'Vea lo que dicen otros pacientes')}</h3>
+            <p className="text-white/90 font-medium mb-8 relative z-10">{t('Join thousands of recovered patients across the DFW Metroplex.', 'Únase a miles de pacientes recuperados en DFW.')}</p>
             <button 
               className="btn-aero-glass w-full py-4 rounded-full flex shadow-xl border-white/40 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300"
             >
-              <span className="relative z-10 flex items-center justify-center w-full">Read More <ArrowRight className="w-5 h-5 ml-2" /></span>
+              <span className="relative z-10 flex items-center justify-center w-full">{t('Read More', 'Leer Más')} <ArrowRight className="w-5 h-5 ml-2" /></span>
             </button>
           </div>
         </div>
@@ -507,8 +509,8 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#084654] via-[#0b80a6] to-[#0ea5e9] mb-4">Convenient DFW Locations</h2>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto">Find a Care Plus clinic near you. We have 6 locations across the Metroplex ready to serve your recovery needs.</p>
+            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#084654] via-[#0b80a6] to-[#0ea5e9] mb-4">{t('Convenient DFW Locations', 'Clínicas Convenientes en DFW')}</h2>
+            <p className="text-slate-600 text-lg max-w-2xl mx-auto">{t('Find a Care Plus clinic near you. We have 6 locations across the Metroplex ready to serve your recovery needs.', 'Encuentre una clínica de Care Plus cerca de usted. Tenemos 6 ubicaciones en Metroplex listas para ayudarle en su recuperación.')}</p>
           </div>
           
           <InteractiveClinics mapTexture={IMAGES.mapTexture} />
@@ -527,33 +529,33 @@ export default function App() {
           <div className="glass-panel rounded-[3rem] p-8 md:p-12 border-[4px] border-white shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-slate-50/60 backdrop-blur-xl">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#084654] via-[#0b80a6] to-[#0ea5e9] mb-6">Start Your Recovery Today</h2>
+                <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#084654] via-[#0b80a6] to-[#0ea5e9] mb-6">{t('Start Your Recovery Today', 'Inicie su Recuperación Hoy')}</h2>
                 <p className="text-slate-600 text-lg mb-8 leading-relaxed">
-                  Don't let pain control your life. Schedule your free consultation today and let our expert medical team build a personalized rehabilitation plan for you.
+                  {t("Don't let pain control your life. Schedule your free consultation today and let our expert medical team build a personalized rehabilitation plan for you.", "No deje que el dolor controle su vida. Programe su consulta gratuita hoy y deje que nuestro equipo médico experto cree un plan de rehabilitación personalizado para usted.")}
                 </p>
                 <ul className="space-y-4 mb-8">
-                   <li className="flex items-center text-[#0b80a6] font-bold text-lg"><CheckCircle className="w-6 h-6 mr-3 text-[#b8cf25] drop-shadow-sm" /> Same-Day Appointments</li>
-                   <li className="flex items-center text-[#0b80a6] font-bold text-lg"><CheckCircle className="w-6 h-6 mr-3 text-[#b8cf25] drop-shadow-sm" /> Free Initial Consultation</li>
-                   <li className="flex items-center text-[#0b80a6] font-bold text-lg"><CheckCircle className="w-6 h-6 mr-3 text-[#b8cf25] drop-shadow-sm" /> Transportation Assistance Available</li>
+                   <li className="flex items-center text-[#0b80a6] font-bold text-lg"><CheckCircle className="w-6 h-6 mr-3 text-[#b8cf25] drop-shadow-sm" /> {t('Same-Day Appointments', 'Citas el Mismo Día')}</li>
+                   <li className="flex items-center text-[#0b80a6] font-bold text-lg"><CheckCircle className="w-6 h-6 mr-3 text-[#b8cf25] drop-shadow-sm" /> {t('Free Initial Consultation', 'Consulta Inicial Gratuita')}</li>
+                   <li className="flex items-center text-[#0b80a6] font-bold text-lg"><CheckCircle className="w-6 h-6 mr-3 text-[#b8cf25] drop-shadow-sm" /> {t('Transportation Assistance Available', 'Asistencia de Transporte Disponible')}</li>
                 </ul>
               </div>
               <div className="bg-white rounded-[2rem] p-8 shadow-[0_15px_40px_rgba(0,0,0,0.05)] border-[3px] border-white relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-slate-50 z-0" />
                 <form className="space-y-4 relative z-10" onSubmit={(e) => e.preventDefault()}>
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="First Name" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 font-medium placeholder-slate-400 shadow-inner" />
-                    <input type="text" placeholder="Last Name" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 font-medium placeholder-slate-400 shadow-inner" />
+                    <input type="text" placeholder={t("First Name", "Nombre")} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 font-medium placeholder-slate-400 shadow-inner" />
+                    <input type="text" placeholder={t("Last Name", "Apellido")} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 font-medium placeholder-slate-400 shadow-inner" />
                   </div>
-                  <input type="tel" placeholder="Phone Number" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 font-medium placeholder-slate-400 shadow-inner" />
+                  <input type="tel" placeholder={t("Phone Number", "Número de Teléfono")} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-700 font-medium placeholder-slate-400 shadow-inner" />
                   <select className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#0b80a6]/50 transition-shadow text-slate-500 font-medium shadow-inner appearance-none cursor-pointer">
-                    <option value="">What do you need help with?</option>
-                    <option value="auto">Auto Accident Injury</option>
-                    <option value="work">Work Injury</option>
-                    <option value="back">Back or Joint Pain</option>
-                    <option value="sports">Sports Injury</option>
+                    <option value="">{t('What do you need help with?', '¿En qué necesita ayuda?')}</option>
+                    <option value="auto">{t('Auto Accident Injury', 'Lesión por Accidente de Auto')}</option>
+                    <option value="work">{t('Work Injury', 'Lesión de Trabajo')}</option>
+                    <option value="back">{t('Back or Joint Pain', 'Dolor de Espalda o Articulaciones')}</option>
+                    <option value="sports">{t('Sports Injury', 'Lesión Deportiva')}</option>
                   </select>
                   <button className="w-full btn-aero-orange py-4 rounded-full font-bold text-lg shadow-lg flex justify-center mt-6 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300">
-                    <span className="relative z-10 flex items-center justify-center w-full">Request Appointment <ArrowRight className="w-5 h-5 ml-2" /></span>
+                    <span className="relative z-10 flex items-center justify-center w-full">{t('Request Appointment', 'Solicitar Cita')} <ArrowRight className="w-5 h-5 ml-2" /></span>
                   </button>
                 </form>
               </div>
@@ -576,27 +578,27 @@ export default function App() {
                 <span className="font-bold text-3xl text-white tracking-tight drop-shadow-md">Care<span className="text-[#b8cf25]">Plus</span></span>
               </div>
               <p className="text-blue-100/90 mb-6 max-w-sm">
-                Professional pain management and injury rehabilitation across the Dallas-Fort Worth Metroplex.
+                {t('Professional pain management and injury rehabilitation across the Dallas-Fort Worth Metroplex.', 'Manejo profesional del dolor y rehabilitación de lesiones en Metroplex Dallas-Fort Worth.')}
               </p>
             </div>
             <div>
-              <h4 className="text-white font-bold text-lg mb-6 drop-shadow-sm">Working Hours</h4>
+              <h4 className="text-white font-bold text-lg mb-6 drop-shadow-sm">{t('Working Hours', 'Horario de Atención')}</h4>
               <ul className="space-y-3 text-blue-100/90">
-                <li className="flex justify-between border-b border-white/10 pb-2"><span>Mon - Thu</span> <span>8:00 AM - 6:00 PM</span></li>
-                <li className="flex justify-between border-b border-white/10 pb-2"><span>Friday</span> <span>8:00 AM - 1:00 PM</span></li>
-                <li className="flex justify-between text-[#f97316] drop-shadow-sm"><span>Sat - Sun</span> <span>Closed</span></li>
+                <li className="flex justify-between border-b border-white/10 pb-2"><span>{t('Mon - Thu', 'Lun - Jue')}</span> <span>8:00 AM - 6:00 PM</span></li>
+                <li className="flex justify-between border-b border-white/10 pb-2"><span>{t('Friday', 'Viernes')}</span> <span>8:00 AM - 1:00 PM</span></li>
+                <li className="flex justify-between text-[#f97316] drop-shadow-sm"><span>{t('Sat - Sun', 'Sáb - Dom')}</span> <span>{t('Closed', 'Cerrado')}</span></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold text-lg mb-6 drop-shadow-sm">Need Immediate Help?</h4>
+              <h4 className="text-white font-bold text-lg mb-6 drop-shadow-sm">{t('Need Immediate Help?', '¿Necesita Ayuda Inmediata?')}</h4>
               <button 
                 className="w-full btn-aero-orange px-6 py-4 rounded-full mb-4 flex shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300"
               >
                 <span className="relative z-10 flex items-center justify-center w-full">
-                  <Phone className="w-5 h-5 text-white mr-2" /> Call Now
+                  <Phone className="w-5 h-5 text-white mr-2" /> {t('Call Now', 'Llamar Ahora')}
                 </span>
               </button>
-              <p className="text-blue-100/70 text-sm text-center">We accept walk-ins during business hours.</p>
+              <p className="text-blue-100/70 text-sm text-center">{t('We accept walk-ins during business hours.', 'Aceptamos visitas sin cita durante el horario laboral.')}</p>
             </div>
           </div>
           <div className="pt-8 border-t border-white/10 flex flex-col items-center text-center">
