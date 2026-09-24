@@ -2,6 +2,21 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Calendar, ArrowRight, ShieldCheck, Activity, Users, Menu, Building, HeartHandshake, Sparkles, User, CheckCircle, MessageSquare, Home, MessageCircle, Star } from 'lucide-react';
 import InteractiveClinics from './InteractiveClinics';
+import { LanguageContext } from './LanguageContext';
+
+const LanguageToggle = () => {
+  const { lang, toggleLanguage } = React.useContext(LanguageContext);
+  return (
+    <button 
+      onClick={toggleLanguage}
+      className="btn-aero-glass px-3 py-1.5 rounded-full flex items-center shadow-sm hover:scale-105 active:scale-95 transition-transform duration-300 font-extrabold text-xs border border-white/60 bg-white/60 backdrop-blur-md"
+    >
+      <span className={lang === 'en' ? 'text-[#084654]' : 'text-slate-400 opacity-60'}>EN</span>
+      <span className="mx-1.5 text-slate-300">|</span>
+      <span className={lang === 'es' ? 'text-[#084654]' : 'text-slate-400 opacity-60'}>ES</span>
+    </button>
+  );
+};
 
 
 // ==========================================
@@ -139,6 +154,7 @@ const MobileDockItem = ({ icon: Icon, label }) => (
 
 export default function App() {
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const { t } = React.useContext(LanguageContext);
   
   React.useEffect(() => {
     const handleScroll = () => {
@@ -163,28 +179,30 @@ export default function App() {
               <span className="font-bold text-2xl text-medical-blue-950 tracking-tight drop-shadow-sm">Care<span className="text-[#8cb320]">Plus</span></span>
             </div>
             {/* Links */}
-            <div className="flex space-x-8 items-center">
-              <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">Services</a>
-              <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">Our Team</a>
-              <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">Locations</a>
-              <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">Testimonials</a>
+            <div className="flex space-x-6 items-center">
+              <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">{t('Services', 'Servicios')}</a>
+              <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">{t('Our Team', 'Nuestro Equipo')}</a>
+              <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">{t('Locations', 'Ubicaciones')}</a>
+              <a href="#" className="text-medical-blue-900 font-medium hover:text-[#0b80a6] transition-colors">{t('Testimonials', 'Testimonios')}</a>
+              <LanguageToggle />
               <button 
                 className={`btn-aero-orange rounded-full flex shadow-md hover:scale-105 active:scale-95 transition-all duration-300 ${isScrolled ? 'px-5 py-2 text-sm' : 'px-6 py-2.5 text-base'}`}
               >
-                <span className="relative z-10 flex items-center justify-center w-full">Call Now</span>
+                <span className="relative z-10 flex items-center justify-center w-full">{t('Call Now', 'Llamar Ahora')}</span>
               </button>
             </div>
          </div>
       </nav>
       
-      {/* Mobile Top Bar (Logo Only, shrinks on scroll) */}
+      {/* Mobile Top Bar */}
       <nav className="md:hidden fixed w-full z-50 transition-all duration-500 ease-out top-4 px-4 pointer-events-none">
-         <div className={`mx-auto pointer-events-auto transition-all duration-500 ease-out flex items-center justify-center rounded-full border ${
+         <div className={`mx-auto pointer-events-auto transition-all duration-500 ease-out flex items-center justify-between rounded-full border px-4 ${
            isScrolled
-             ? 'bg-white/70 backdrop-blur-2xl shadow-lg border-white/70 h-12 w-32'
+             ? 'bg-white/70 backdrop-blur-2xl shadow-lg border-white/70 h-12 w-64'
              : 'bg-white/50 backdrop-blur-lg shadow-[0_8px_30px_rgba(0,0,0,0.08),inset_0_1px_1px_rgba(255,255,255,0.8)] border-white/40 h-16 w-full'
          }`}>
             <span className={`font-bold text-medical-blue-950 tracking-tight transition-all duration-300 ${isScrolled ? 'text-lg' : 'text-2xl'}`}>Care<span className="text-[#8cb320]">Plus</span></span>
+            <LanguageToggle />
          </div>
       </nav>
       
@@ -193,10 +211,10 @@ export default function App() {
          <div className="bg-white/40 backdrop-blur-3xl border border-white/70 rounded-[2rem] p-2 flex justify-between items-center shadow-[0_20px_50px_rgba(0,0,0,0.2),inset_0_2px_5px_rgba(255,255,255,0.9)] relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/60 to-transparent rounded-t-[2rem] pointer-events-none" />
             
-            <MobileDockItem icon={Home} label="Home" />
-            <MobileDockItem icon={Activity} label="Services" />
-            <MobileDockItem icon={Users} label="Team" />
-            <MobileDockItem icon={MapPin} label="Locations" />
+            <MobileDockItem icon={Home} label={t("Home", "Inicio")} />
+            <MobileDockItem icon={Activity} label={t("Services", "Servicios")} />
+            <MobileDockItem icon={Users} label={t("Team", "Equipo")} />
+            <MobileDockItem icon={MapPin} label={t("Locations", "Clínicas")} />
             
             <button 
               className="w-12 h-12 rounded-full btn-aero-orange flex items-center justify-center border border-white/50 shadow-lg ml-1 flex-shrink-0 active:scale-90 transition-transform duration-200"
@@ -224,18 +242,18 @@ export default function App() {
                   <div className="absolute inset-0 rounded-full border border-white/60 z-20 pointer-events-none" />
                   <HeartHandshake className="w-4 h-4 text-white drop-shadow-md z-10 relative" />
                 </div>
-                <span className="text-[#084654] font-extrabold tracking-wider uppercase text-[11px] drop-shadow-sm leading-tight">Accepting New Patients</span>
+                <span className="text-[#084654] font-extrabold tracking-wider uppercase text-[11px] drop-shadow-sm leading-tight">{t('Accepting New Patients', 'Aceptando Nuevos Pacientes')}</span>
               </div>
               
               <h1 className="text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-md">
-                Expert Relief for <br className="hidden lg:block"/>
+                {t('Expert Relief for', 'Alivio Experto para')} <br className="hidden lg:block"/>
                 <span className="text-[#c7d825] drop-shadow-sm">
-                  Pain & Injuries
+                  {t('Pain & Injuries', 'Dolor y Lesiones')}
                 </span>
               </h1>
 
               <p className="text-blue-50/90 text-base sm:text-lg mb-8 max-w-xl leading-relaxed">
-                Dallas-Fort Worth's premier chiropractic and injury rehabilitation clinic. We provide advanced, non-invasive therapies to get you back to living pain-free.
+                {t("Dallas-Fort Worth's premier chiropractic and injury rehabilitation clinic. We provide advanced, non-invasive therapies to get you back to living pain-free.", "La principal clínica de quiropráctica y rehabilitación de lesiones en Dallas-Fort Worth. Ofrecemos terapias avanzadas y no invasivas para que vuelva a vivir sin dolor.")}
               </p>
               
               {/* MOBILE ONLY IMAGE */}
@@ -269,7 +287,7 @@ export default function App() {
                   className="btn-aero-green px-8 py-4 rounded-full text-lg shadow-xl flex hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 w-full sm:w-auto"
                 >
                   <span className="relative z-10 flex items-center justify-center w-full">
-                    <Calendar className="w-5 h-5 text-medical-blue-950 mr-2 drop-shadow-sm" /> Book Free Consult
+                    <Calendar className="w-5 h-5 text-medical-blue-950 mr-2 drop-shadow-sm" /> {t('Book Free Consult', 'Consulta Gratis')}
                   </span>
                 </button>
                 <button 
@@ -291,7 +309,7 @@ export default function App() {
                     <Star className="w-4 h-4 fill-current" />
                     <Star className="w-4 h-4 fill-current" />
                   </div>
-                  <span>5.0 (450+ Reviews)</span>
+                  <span>5.0 (450+ {t('Reviews', 'Reseñas')})</span>
                 </div>
                 <span className="text-white/20">|</span>
                 <div className="flex items-center">

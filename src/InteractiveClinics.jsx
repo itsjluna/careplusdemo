@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Phone, ArrowRight } from 'lucide-react';
+import { LanguageContext } from './LanguageContext';
 
 const CLINICS = [
   {
@@ -7,8 +8,8 @@ const CLINICS = [
     city: 'Garland',
     address: '1705 Beltline Rd. Garland, TX 75044',
     phone: '(972) 897-1784',
-    hours: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm',
-    colorName: 'Healing Green',
+    hours: { en: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm', es: 'Lun-Jue: 8am-6pm | Vie: 8am-1pm' },
+    colorName: { en: 'Healing Green', es: 'Verde Curativo' },
     glowHex: '#b8cf25',
     buttonFrom: '#b8cf25',
     buttonTo: '#8cb320',
@@ -19,8 +20,8 @@ const CLINICS = [
     city: 'Dallas',
     address: '1011 S. Cockrell Hill Rd, Ste. 105, Dallas, TX 75211',
     phone: '(214) 272-9286',
-    hours: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm',
-    colorName: 'Sapphire Blue',
+    hours: { en: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm', es: 'Lun-Jue: 8am-6pm | Vie: 8am-1pm' },
+    colorName: { en: 'Sapphire Blue', es: 'Azul Zafiro' },
     glowHex: '#38bdf8',
     buttonFrom: '#38bdf8',
     buttonTo: '#0284c7',
@@ -31,8 +32,8 @@ const CLINICS = [
     city: 'Mesquite',
     address: '3815 N. Town East Blvd. Mesquite, TX 75150',
     phone: '(214) 242-9713',
-    hours: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm',
-    colorName: 'Sunset Orange',
+    hours: { en: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm', es: 'Lun-Jue: 8am-6pm | Vie: 8am-1pm' },
+    colorName: { en: 'Sunset Orange', es: 'Naranja Ocaso' },
     glowHex: '#ff9a3d',
     buttonFrom: '#ff9a3d',
     buttonTo: '#ea580c',
@@ -43,8 +44,8 @@ const CLINICS = [
     city: 'Irving',
     address: "2940 N. O'Connor Rd Ste. 129, Irving, TX 75062",
     phone: '(972) 600-9003',
-    hours: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm',
-    colorName: 'Amethyst Purple',
+    hours: { en: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm', es: 'Lun-Jue: 8am-6pm | Vie: 8am-1pm' },
+    colorName: { en: 'Amethyst Purple', es: 'Púrpura Amatista' },
     glowHex: '#a855f7',
     buttonFrom: '#c084fc',
     buttonTo: '#9333ea',
@@ -55,8 +56,8 @@ const CLINICS = [
     city: 'Plano',
     address: 'Plano, TX (Central Area)',
     phone: '(972) 123-4567',
-    hours: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm',
-    colorName: 'Cyan Ocean',
+    hours: { en: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm', es: 'Lun-Jue: 8am-6pm | Vie: 8am-1pm' },
+    colorName: { en: 'Cyan Ocean', es: 'Océano Cian' },
     glowHex: '#2dd4bf',
     buttonFrom: '#2dd4bf',
     buttonTo: '#0d9488',
@@ -67,8 +68,8 @@ const CLINICS = [
     city: 'Fort Worth',
     address: 'Fort Worth, TX Area',
     phone: '(817) 402-9484',
-    hours: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm',
-    colorName: 'Ruby Red',
+    hours: { en: 'Mon-Thu: 8am-6pm | Fri: 8am-1pm', es: 'Lun-Jue: 8am-6pm | Vie: 8am-1pm' },
+    colorName: { en: 'Ruby Red', es: 'Rojo Rubí' },
     glowHex: '#fb7185',
     buttonFrom: '#fb7185',
     buttonTo: '#e11d48',
@@ -78,6 +79,7 @@ const CLINICS = [
 
 export default function InteractiveClinics({ mapTexture }) {
   const [activeClinic, setActiveClinic] = React.useState(CLINICS[0]);
+  const { t, lang } = React.useContext(LanguageContext);
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 mt-12 w-full">
@@ -112,7 +114,7 @@ export default function InteractiveClinics({ mapTexture }) {
                 </div>
                 <div className="text-left">
                   <h3 className={`font-bold text-lg leading-tight transition-colors duration-500 ${isActive ? 'text-[#084654]' : 'text-slate-600'}`}>{clinic.city}</h3>
-                  <p className={`text-[11px] font-semibold uppercase tracking-wider transition-colors duration-500 ${isActive ? 'text-slate-500' : 'text-slate-400'}`}>{isActive ? clinic.colorName : 'Select Clinic'}</p>
+                  <p className={`text-[11px] font-semibold uppercase tracking-wider transition-colors duration-500 ${isActive ? 'text-slate-500' : 'text-slate-400'}`}>{isActive ? clinic.colorName[lang] : t('Select Clinic', 'Seleccionar Clínica')}</p>
                 </div>
               </div>
               
@@ -141,7 +143,7 @@ export default function InteractiveClinics({ mapTexture }) {
         <div className="p-6 md:p-10 flex flex-col h-full z-10 relative">
           <div className="flex justify-between items-start mb-8">
             <div>
-              <h3 className="text-4xl font-extrabold text-[#084654] mb-2">{activeClinic.city} Clinic</h3>
+              <h3 className="text-4xl font-extrabold text-[#084654] mb-2">{t(`${activeClinic.city} Clinic`, `Clínica de ${activeClinic.city}`)}</h3>
               <p className="text-slate-600 font-medium flex items-center">
                 <MapPin className="w-4 h-4 mr-2" style={{ color: activeClinic.buttonTo }}/> 
                 {activeClinic.address}
@@ -152,12 +154,12 @@ export default function InteractiveClinics({ mapTexture }) {
           <div className="grid md:grid-cols-2 gap-8 flex-grow">
             <div className="space-y-6">
               <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-5 border border-white shadow-sm hover:shadow-md transition-shadow">
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Contact</p>
+                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">{t('Contact', 'Contacto')}</p>
                 <p className="text-xl font-bold text-[#084654]">{activeClinic.phone}</p>
               </div>
               <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-5 border border-white shadow-sm hover:shadow-md transition-shadow">
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Working Hours</p>
-                <p className="text-md font-bold text-[#084654] leading-relaxed">{activeClinic.hours}</p>
+                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">{t('Working Hours', 'Horario')}</p>
+                <p className="text-md font-bold text-[#084654] leading-relaxed">{activeClinic.hours[lang]}</p>
               </div>
               
               <div className="pt-4 flex flex-col sm:flex-row gap-4">
@@ -170,14 +172,14 @@ export default function InteractiveClinics({ mapTexture }) {
                   }}
                 >
                    <span className="relative z-10 flex items-center justify-center w-full">
-                     <Phone className="w-5 h-5 mr-2 drop-shadow-sm text-white" /> Call Clinic
+                     <Phone className="w-5 h-5 mr-2 drop-shadow-sm text-white" /> {t('Call Clinic', 'Llamar Clínica')}
                    </span>
                 </button>
                 <button 
                   className="btn-aero-glass px-6 py-4 rounded-full flex items-center justify-center hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 w-full shadow-xl border-white/40"
                 >
                    <span className="relative z-10 flex items-center justify-center w-full text-[#084654] font-bold">
-                     <MapPin className="w-5 h-5 mr-2 drop-shadow-sm" style={{ color: activeClinic.buttonTo }} /> Directions
+                     <MapPin className="w-5 h-5 mr-2 drop-shadow-sm" style={{ color: activeClinic.buttonTo }} /> {t('Directions', 'Direcciones')}
                    </span>
                 </button>
               </div>
