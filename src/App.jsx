@@ -148,7 +148,7 @@ const MobileDockItem = ({ icon: Icon, label, isActive }) => (
   <button 
     className="flex flex-col items-center justify-center w-14 h-12 relative group active:scale-90 active:-translate-y-0.5 transition-transform duration-200"
   >
-    <div className={`absolute inset-0 rounded-xl transition-colors ${isActive ? 'bg-white/30 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8)]' : 'bg-white/0 group-hover:bg-white/20'}`} />
+    <div className="absolute inset-0 bg-white/0 group-hover:bg-white/20 rounded-xl transition-colors" />
     <Icon className={`w-5 h-5 drop-shadow-sm mb-0.5 relative z-10 ${isActive ? 'text-[#084654]' : 'text-[#084654]/60'}`} />
     <span className={`text-[9px] font-bold relative z-10 ${isActive ? 'text-[#084654]' : 'text-[#084654]/60'}`}>{label}</span>
     {isActive && (
@@ -273,11 +273,18 @@ export default function App() {
                     decoding="async"
                     className="rounded-[1.5rem] opacity-100 object-cover h-[300px] sm:h-[400px] w-full"
                   />
+                  <div className="absolute -bottom-4 left-4 z-30 bg-white/90 backdrop-blur-xl p-2 pr-6 rounded-full flex items-center space-x-3 shadow-[0_10px_20px_rgba(0,0,0,0.2)] border-2 border-white">
+                    <div className="glass-orb bg-gradient-to-b from-[#ff9a3d] to-[#ea580c] w-10 h-10 shadow-sm flex-shrink-0">
+                      <ShieldCheck className="w-5 h-5 text-white z-10 relative drop-shadow-md" strokeWidth={2.5} />
+                    </div>
+                    <div className="flex flex-col justify-center text-left">
+                      <p className="text-[#084654] font-extrabold uppercase tracking-wide text-[10px] leading-tight">No Insurance Needed</p>
+                      <p className="text-[#ea580c] text-[10px] font-bold leading-tight">Low Self-Pay Cost</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-
-              
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto justify-center lg:justify-start">
                 <button 
                   className="btn-aero-green px-8 py-4 rounded-full text-lg shadow-xl flex hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 w-full sm:w-auto"
@@ -293,28 +300,6 @@ export default function App() {
                     <Phone className="w-5 h-5 text-white mr-2 drop-shadow-sm" /> (800) 123-4567
                   </span>
                 </button>
-              </div>
-
-              {/* MOBILE ONLY EXTRACTED BADGES */}
-              <div className="lg:hidden w-full flex flex-col space-y-3 mt-6 px-2">
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 flex items-center shadow-lg border border-white/20">
-                  <div className="glass-orb bg-gradient-to-b from-[#ff9a3d] to-[#ea580c] w-12 h-12 flex items-center justify-center mr-4 shadow-sm flex-shrink-0">
-                    <ShieldCheck className="w-6 h-6 text-white drop-shadow-md z-10 relative" />
-                  </div>
-                  <div className="text-left flex-1">
-                    <p className="text-white font-extrabold uppercase tracking-wide text-[12px] leading-tight">{t('No Insurance Needed', 'No se requiere seguro')}</p>
-                    <p className="text-[#ff9a3d] text-[11px] font-bold mt-0.5">{t('Low Self-Pay Cost', 'Bajo Costo Directo')}</p>
-                  </div>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3 flex items-center shadow-lg border border-white/20">
-                  <div className="glass-orb bg-gradient-to-b from-[#b8cf25] to-[#8cb320] w-12 h-12 flex items-center justify-center mr-4 shadow-sm flex-shrink-0">
-                    <Users className="w-6 h-6 text-white drop-shadow-md z-10 relative" />
-                  </div>
-                  <div className="text-left flex-1">
-                    <p className="text-white font-extrabold uppercase tracking-wide text-[12px] leading-tight">{t('Bilingual Staff', 'Personal Bilingüe')}</p>
-                    <p className="text-[#b8cf25] text-[11px] font-bold mt-0.5">{t('Hablamos Español', 'We Speak Spanish')}</p>
-                  </div>
-                </div>
               </div>
 
               {/* Trust & Credibility Bar */}
@@ -400,11 +385,17 @@ export default function App() {
           <QuickService className="min-w-[85vw] sm:min-w-[45vw] lg:min-w-0 snap-center" icon={ShieldCheck} title={t("Work Injuries", "Lesiones de Trabajo")} desc={t("Rehabilitation to get you back to work safely.", "Rehabilitación para regresar al trabajo a salvo.")} />
         </motion.div>
         
-        {/* Mobile Swipe Hint */}
-        <div className="lg:hidden flex justify-center -mt-2 mb-4">
-           <p className="text-[10px] text-white/50 font-bold uppercase tracking-widest flex items-center">
-             ← {t('Swipe to see more', 'Desliza para ver más')} →
-           </p>
+        {/* Mobile Swipe Indicators */}
+        <div className="lg:hidden flex flex-col items-center justify-center -mt-2 mb-4 space-y-3">
+          <div className="flex items-center space-x-1.5">
+            <div className="h-2 rounded-full w-6 bg-gradient-to-r from-[#b8cf25] to-[#8cb320] shadow-sm" />
+            <div className="h-2 rounded-full w-2 bg-white/30" />
+            <div className="h-2 rounded-full w-2 bg-white/30" />
+            <div className="h-2 rounded-full w-2 bg-white/30" />
+          </div>
+          <p className="text-[10px] text-white/50 font-bold uppercase tracking-widest flex items-center">
+            ← {t('Swipe to see more', 'Desliza para ver más')} →
+          </p>
         </div>
       </section>
 
