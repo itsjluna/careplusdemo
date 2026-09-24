@@ -178,8 +178,8 @@ export default function App() {
       <nav className="hidden md:block fixed w-full z-50 transition-all duration-500 ease-out top-6 px-6 pointer-events-none">
          <div className={`mx-auto pointer-events-auto transition-all duration-500 ease-out flex items-center justify-between rounded-full border ${
            isScrolled 
-             ? 'max-w-4xl bg-white/70 backdrop-blur-2xl shadow-[0_15px_40px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,1)] border-white/70 h-16 px-6' 
-             : 'max-w-7xl bg-white/40 backdrop-blur-lg shadow-[0_8px_30px_rgba(0,0,0,0.08),inset_0_1px_1px_rgba(255,255,255,0.8)] border-white/40 h-20 px-10'
+             ? 'max-w-4xl bg-gradient-to-b from-white/90 to-white/70 backdrop-blur-2xl shadow-[0_20px_40px_rgba(0,0,0,0.15),inset_0_2px_5px_rgba(255,255,255,1)] border-[2px] border-white h-16 px-6' 
+             : 'max-w-7xl bg-gradient-to-b from-white/50 to-white/20 backdrop-blur-2xl shadow-[0_15px_40px_rgba(0,0,0,0.1),inset_0_2px_5px_rgba(255,255,255,0.9)] border-[2px] border-white/70 h-20 px-10'
          }`}>
             {/* Logo */}
             <div className="flex items-center space-x-2">
@@ -215,7 +215,7 @@ export default function App() {
       
       {/* Mobile Bottom Dock */}
       <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[360px]">
-         <div className="bg-white/40 backdrop-blur-3xl border border-white/70 rounded-[2rem] p-2 flex justify-between items-center shadow-[0_20px_50px_rgba(0,0,0,0.2),inset_0_2px_5px_rgba(255,255,255,0.9)] relative overflow-hidden">
+         <div className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-3xl border-[2px] border-white rounded-[2rem] p-2 flex justify-between items-center shadow-[0_20px_50px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)] relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/60 to-transparent rounded-t-[2rem] pointer-events-none" />
             
             <MobileDockItem icon={Home} label="Home" />
@@ -245,9 +245,12 @@ export default function App() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="flex flex-col items-center lg:items-start text-center lg:text-left"
             >
-              <div className="inline-flex items-center px-4 py-2 rounded-full glass-panel-dark text-[#c7d825] text-sm font-semibold mb-6 border-white/20 shadow-lg">
-                <span className="w-2 h-2 rounded-full bg-[#c7d825] mr-2 animate-pulse shadow-[0_0_8px_#c7d825]"></span>
-                Accepting New Patients
+              <div className="inline-flex items-center bg-gradient-to-b from-white/95 to-white/70 backdrop-blur-2xl p-1.5 pr-5 rounded-full mb-6 shadow-[0_15px_30px_rgba(0,0,0,0.3),inset_0_2px_5px_rgba(255,255,255,1)] border-[2px] border-white cursor-default hover:scale-105 transition-transform duration-300">
+                <div className="glass-orb bg-gradient-to-b from-[#b8cf25] to-[#0a7356] w-8 h-8 flex items-center justify-center mr-3 shadow-sm flex-shrink-0">
+                  <div className="absolute inset-0 rounded-full border border-white/60 z-20 pointer-events-none" />
+                  <HeartHandshake className="w-4 h-4 text-white drop-shadow-md z-10 relative" />
+                </div>
+                <span className="text-[#084654] font-extrabold tracking-wider uppercase text-[11px] drop-shadow-sm leading-tight">Accepting New Patients</span>
               </div>
               
               <h1 className="text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-md">
