@@ -159,7 +159,24 @@ const MobileDockItem = ({ icon: Icon, label, isActive }) => (
 
 export default function App() {
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const [activeService, setActiveService] = React.useState(0);
+  const servicesRef = React.useRef(null);
   const { t } = React.useContext(LanguageContext);
+  
+  const handleServiceScroll = () => {
+    if (!servicesRef.current) return;
+    const { scrollLeft, scrollWidth } = servicesRef.current;
+    const itemWidth = scrollWidth / 4;
+    const index = Math.min(3, Math.max(0, Math.round(scrollLeft / itemWidth)));
+    setActiveService(index);
+  };
+
+  const scrollToService = (index) => {
+    if (!servicesRef.current) return;
+    const itemWidth = servicesRef.current.scrollWidth / 4;
+    servicesRef.current.scrollTo({ left: index * itemWidth, behavior: 'smooth' });
+    setActiveService(index);
+  };
   
   React.useEffect(() => {
     const handleScroll = () => {
@@ -373,6 +390,8 @@ export default function App() {
       <section className="relative z-30 -mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="sr-only">Our Core Services</h2>
         <motion.div 
+          ref={servicesRef}
+          onScroll={handleServiceScroll}
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
@@ -388,10 +407,16 @@ export default function App() {
         {/* Mobile Swipe Indicators */}
         <div className="lg:hidden flex flex-col items-center justify-center -mt-2 mb-4 space-y-3">
           <div className="flex items-center space-x-1.5">
-            <div className="h-2 rounded-full w-6 bg-gradient-to-r from-[#b8cf25] to-[#8cb320] shadow-sm" />
-            <div className="h-2 rounded-full w-2 bg-white/30" />
-            <div className="h-2 rounded-full w-2 bg-white/30" />
-            <div className="h-2 rounded-full w-2 bg-white/30" />
+            {[0, 1, 2, 3].map((index) => (
+              <button
+                key={index}
+                onClick={() => scrollToService(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  activeService === index ? 'w-6 bg-gradient-to-r from-[#b8cf25] to-[#8cb320] shadow-sm' : 'w-2 bg-white/30 hover:bg-white/50'
+                }`}
+                aria-label={`Go to service ${index + 1}`}
+              />
+            ))}
           </div>
           <p className="text-[10px] text-white/50 font-bold uppercase tracking-widest flex items-center">
             ← {t('Swipe to see more', 'Desliza para ver más')} →
