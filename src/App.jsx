@@ -567,8 +567,11 @@ export default function App() {
                     <option value="back">{t('Back or Joint Pain', 'Dolor de Espalda o Articulaciones')}</option>
                     <option value="sports">{t('Sports Injury', 'Lesión Deportiva')}</option>
                   </select>
-                  <button className="w-full btn-aero-orange py-4 rounded-full font-bold text-lg shadow-lg flex justify-center mt-6 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300">
-                    <span className="relative z-10 flex items-center justify-center w-full">{t('Request Appointment', 'Solicitar Cita')} <ArrowRight className="w-5 h-5 ml-2" /></span>
+                  <button className="w-full btn-aero-orange px-6 py-4 rounded-full font-bold text-base sm:text-lg shadow-lg flex justify-center mt-6 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300">
+                    <span className="relative z-10 flex items-center justify-center text-center">
+                      <span>{t('Request Appointment', 'Solicitar Cita')}</span>
+                      <ArrowRight className="w-5 h-5 ml-2 flex-shrink-0" />
+                    </span>
                   </button>
                 </form>
               </div>
@@ -605,10 +608,11 @@ export default function App() {
             <div>
               <h4 className="text-white font-bold text-lg mb-6 drop-shadow-sm">{t('Need Immediate Help?', '¿Necesita Ayuda Inmediata?')}</h4>
               <button 
-                className="w-full btn-aero-orange px-6 py-4 rounded-full mb-4 flex shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300"
+                className="w-full btn-aero-orange px-6 py-4 rounded-full mb-4 flex justify-center shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300"
               >
-                <span className="relative z-10 flex items-center justify-center w-full">
-                  <Phone className="w-5 h-5 text-white mr-2" /> {t('Call Now', 'Llamar Ahora')}
+                <span className="relative z-10 flex items-center justify-center text-center">
+                  <Phone className="w-5 h-5 text-white mr-2 flex-shrink-0" /> 
+                  <span>{t('Call Now', 'Llamar Ahora')}</span>
                 </span>
               </button>
               <p className="text-blue-100/70 text-sm text-center">{t('We accept walk-ins during business hours.', 'Aceptamos visitas sin cita durante el horario laboral.')}</p>
