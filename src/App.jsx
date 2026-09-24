@@ -127,17 +127,17 @@ const HighlightFeature = ({ img, title, icon: Icon }) => (
 
 const TestimonialCard = ({ name, text }) => (
   <div className="relative">
-    <div className="glass-panel aero-card-sheen p-8 rounded-3xl relative h-full">
-      <MessageSquare className="w-10 h-10 text-[#084654]/5 absolute top-6 right-6" />
-      <p className="text-slate-700 italic leading-relaxed mt-2 relative z-10">"{text}"</p>
-      <p className="font-bold text-[#084654] mt-4 relative z-10">- {name}</p>
+    <div className="glass-panel aero-card-sheen p-6 sm:p-8 rounded-3xl relative h-full">
+      <MessageSquare className="w-8 h-8 sm:w-10 sm:h-10 text-[#084654]/5 absolute top-4 right-4 sm:top-6 sm:right-6" />
+      <p className="text-slate-700 italic leading-relaxed mt-2 relative z-10 text-sm sm:text-base">"{text}"</p>
+      <p className="font-bold text-[#084654] mt-4 relative z-10 text-sm sm:text-base">- {name}</p>
     </div>
-    <div className="absolute -top-5 -left-5 z-20">
-       <div className="glass-orb bg-gradient-to-b from-slate-200 to-slate-300 w-12 h-12 border-2 border-white shadow-md">
-         <User className="text-slate-600 w-6 h-6 z-10 relative" />
+    <div className="absolute -top-4 -left-2 sm:-top-5 sm:-left-5 z-20">
+       <div className="glass-orb bg-gradient-to-b from-slate-200 to-slate-300 w-10 h-10 sm:w-12 sm:h-12 border-2 border-white shadow-md">
+         <User className="text-slate-600 w-5 h-5 sm:w-6 sm:h-6 z-10 relative" />
        </div>
        <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-[2px] shadow-sm z-30">
-         <CheckCircle className="text-[#8cb320] w-4 h-4" />
+         <CheckCircle className="text-[#8cb320] w-3 h-3 sm:w-4 sm:h-4" />
        </div>
     </div>
   </div>
