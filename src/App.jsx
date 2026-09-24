@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Calendar, ArrowRight, ShieldCheck, Activity, Users, Menu, Building, HeartHandshake, Sparkles, User, CheckCircle, MessageSquare, Home, MessageCircle, Star } from 'lucide-react';
+import { MapPin, Phone, Calendar, ArrowRight, ShieldCheck, Activity, Users, Menu, Building, HeartHandshake, Sparkles, User, CheckCircle, MessageSquare, Home, MessageCircle, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import InteractiveClinics from './InteractiveClinics';
 import { LanguageContext } from './LanguageContext';
 
@@ -405,21 +405,41 @@ export default function App() {
         </motion.div>
         
         {/* Mobile Swipe Indicators */}
-        <div className="lg:hidden flex flex-col items-center justify-center -mt-2 mb-4 space-y-3">
-          <div className="flex items-center space-x-1.5">
-            {[0, 1, 2, 3].map((index) => (
-              <button
-                key={index}
-                onClick={() => scrollToService(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  activeService === index ? 'w-6 bg-gradient-to-r from-[#b8cf25] to-[#8cb320] shadow-sm' : 'w-2 bg-white/30 hover:bg-white/50'
-                }`}
-                aria-label={`Go to service ${index + 1}`}
-              />
-            ))}
+        <div className="lg:hidden flex flex-col items-center justify-center -mt-2 mb-4 space-y-4">
+          <div className="flex items-center justify-center space-x-6 w-full max-w-[280px]">
+            <button 
+              onClick={() => activeService > 0 && scrollToService(activeService - 1)}
+              disabled={activeService === 0}
+              className={`p-1.5 rounded-full transition-all duration-300 ${activeService === 0 ? 'opacity-30' : 'bg-white/10 active:bg-white/20 active:scale-95'}`}
+              aria-label="Previous service"
+            >
+              <ChevronLeft className="w-5 h-5 text-white" />
+            </button>
+
+            <div className="flex items-center space-x-1.5">
+              {[0, 1, 2, 3].map((index) => (
+                <button
+                  key={index}
+                  onClick={() => scrollToService(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    activeService === index ? 'w-6 bg-gradient-to-r from-[#b8cf25] to-[#8cb320] shadow-sm' : 'w-2 bg-white/30 hover:bg-white/50'
+                  }`}
+                  aria-label={`Go to service ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            <button 
+              onClick={() => activeService < 3 && scrollToService(activeService + 1)}
+              disabled={activeService === 3}
+              className={`p-1.5 rounded-full transition-all duration-300 ${activeService === 3 ? 'opacity-30' : 'bg-white/10 active:bg-white/20 active:scale-95'}`}
+              aria-label="Next service"
+            >
+              <ChevronRight className="w-5 h-5 text-white" />
+            </button>
           </div>
           <p className="text-[10px] text-white/50 font-bold uppercase tracking-widest flex items-center">
-            ← {t('Swipe to see more', 'Desliza para ver más')} →
+            {t('Swipe or Tap to see more', 'Desliza o Toca para ver más')}
           </p>
         </div>
       </section>
