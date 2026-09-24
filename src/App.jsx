@@ -126,18 +126,20 @@ const HighlightFeature = ({ img, title, icon: Icon }) => (
 );
 
 const TestimonialCard = ({ name, text }) => (
-  <div className="glass-panel aero-card-sheen p-8 rounded-3xl relative">
-    <div className="absolute -top-5 -left-5">
+  <div className="relative">
+    <div className="glass-panel aero-card-sheen p-8 rounded-3xl relative h-full">
+      <MessageSquare className="w-10 h-10 text-[#084654]/5 absolute top-6 right-6" />
+      <p className="text-slate-700 italic leading-relaxed mt-2 relative z-10">"{text}"</p>
+      <p className="font-bold text-[#084654] mt-4 relative z-10">- {name}</p>
+    </div>
+    <div className="absolute -top-5 -left-5 z-20">
        <div className="glass-orb bg-gradient-to-b from-slate-200 to-slate-300 w-12 h-12 border-2 border-white shadow-md">
          <User className="text-slate-600 w-6 h-6 z-10 relative" />
        </div>
-       <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-[2px] shadow-sm z-20">
+       <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-[2px] shadow-sm z-30">
          <CheckCircle className="text-[#8cb320] w-4 h-4" />
        </div>
     </div>
-    <MessageSquare className="w-10 h-10 text-[#084654]/5 absolute top-6 right-6" />
-    <p className="text-slate-700 italic leading-relaxed mt-2 relative z-10">"{text}"</p>
-    <p className="font-bold text-[#084654] mt-4 relative z-10">- {name}</p>
   </div>
 );
 
@@ -615,13 +617,15 @@ export default function App() {
     </div>
 
       {/* NEW: Floating Live Chat Widget */}
-      <button
+      <div 
         style={{ position: 'fixed', zIndex: 9999 }}
-        className="bottom-28 md:bottom-6 right-4 md:right-6 glass-orb bg-gradient-to-b from-[#b8cf25] to-[#8cb320] w-14 h-14 md:w-16 md:h-16 shadow-[0_10px_30px_rgba(130,163,20,0.5)] border-2 border-white flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-300"
+        className="bottom-28 md:bottom-6 right-4 md:right-6"
       >
-        <MessageCircle className="w-7 h-7 md:w-8 md:h-8 text-white relative z-10 drop-shadow-md" />
-        <span className="absolute top-0 right-0 w-3.5 h-3.5 md:w-4 md:h-4 bg-[#f97316] border-2 border-white rounded-full animate-pulse shadow-sm z-20"></span>
-      </button>
+        <button className="glass-orb bg-gradient-to-b from-[#b8cf25] to-[#8cb320] w-14 h-14 md:w-16 md:h-16 shadow-[0_10px_30px_rgba(130,163,20,0.5)] border-2 border-white flex items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-300">
+          <MessageCircle className="w-7 h-7 md:w-8 md:h-8 text-white relative z-10 drop-shadow-md" />
+        </button>
+        <span className="absolute -top-1 -right-1 w-4 h-4 md:w-4 md:h-4 bg-[#f97316] border-2 border-white rounded-full animate-pulse shadow-sm z-20"></span>
+      </div>
     </>
   );
 }
