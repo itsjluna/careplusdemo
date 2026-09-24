@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { MapPin, Phone, Calendar, ArrowRight, ShieldCheck, Activity, Users, Menu, Building, HeartHandshake, Sparkles, User, CheckCircle, MessageSquare, Home, MessageCircle, Star } from 'lucide-react';
 import InteractiveClinics from './InteractiveClinics';
 import { LanguageContext } from './LanguageContext';
-import AtmosphericParticles from './AtmosphericParticles';
 
 const LanguageToggle = () => {
   const { lang, toggleLanguage } = React.useContext(LanguageContext);
@@ -228,7 +227,6 @@ export default function App() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-48 overflow-hidden bg-slate-900">
         <VistaAuroraBackground />
-        <AtmosphericParticles />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
