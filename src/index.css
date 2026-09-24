@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/40 backdrop-blur-xl border border-white/60;
+    box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+  }
+  
+  .glass-panel-dark {
+    @apply bg-medical-blue-900/40 backdrop-blur-xl border border-white/20;
+    box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -1px 1px rgba(0, 0, 0, 0.2);
+  }
+  
+  .glass-panel::before, .glass-panel-dark::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1.5px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.7), transparent);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  /* 
+   * HIGHLY OPTIMIZED GLOSSY BUTTON BASE
+   * - Removed 'transition-all' (which causes browser layout thrashing).
+   * - Added 'transform: translateZ(0)' to force hardware acceleration.
+   * - Hover gradient is now pre-rendered on ::after and faded in via 'opacity'.
+   *   Opacity and Transform are the ONLY properties that should be animated for 60fps performance.
+   */
+  .glossy-btn {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* The classic Frutiger top pill highlight (Static, always visible) */
+  .glossy-btn::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 5%;
+    width: 90%;
+    height: 45%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.05) 100%);
+    border-radius: 999px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* GPU-Accelerated Hover Glow */
+  .glossy-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: inherit;
+  }
+  .glossy-btn:hover::after {
+    opacity: 1;
+  }
+
+  /* Green Aero Button */
+  .btn-aero-green {
+    @apply text-medical-blue-950 font-bold glossy-btn;
+    background: linear-gradient(to bottom, #34d399 0%, #059669 100%);
+    box-shadow: 0 4px 15px -3px rgba(5, 150, 105, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.8), inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid #047857;
+  }
+  .btn-aero-green::after {
+    background: linear-gradient(to bottom, #6ee7b7 0%, #10b981 100%);
+  }
+
+  /* Orange Aero Button */
+  .btn-aero-orange {
+    @apply text-white font-bold glossy-btn;
+    background: linear-gradient(to bottom, #fb923c 0%, #ea580c 100%);
+    box-shadow: 0 4px 15px -3px rgba(234, 88, 12, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.8), inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid #c2410c;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+  .btn-aero-orange::after {
+    background: linear-gradient(to bottom, #fdba74 0%, #f97316 100%);
+  }
+
+  /* Glass Aero Button */
+  .btn-aero-glass {
+    @apply text-white font-bold glossy-btn;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 100%);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .btn-aero-glass::after {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+  }
+  
+  /* 
+   * Frutiger Aero Glass Orbs (Used for icons and badges)
+   */
+  .glass-orb {
+    @apply relative flex items-center justify-center overflow-hidden rounded-full;
+    box-shadow: inset 0 4px 6px rgba(255,255,255,0.8), inset 0 -4px 6px rgba(0,0,0,0.2), 0 4px 10px rgba(0,0,0,0.15);
+  }
+  .glass-orb::before {
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    width: 70%;
+    height: 40%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.1));
+    border-radius: 999px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Web 2.0 / Frutiger Diagonal Stripes Background */
+  .frutiger-stripes {
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 2px, transparent 2px, transparent 8px);
+  }
+
+  /* 
+   * Frutiger Aero Card Sheen Hover Effect 
+   * OPTIMIZED: Replaced layout-thrashing 'left' transition with hardware-accelerated 'transform: translateX()'
+   */
+  .aero-card-sheen {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+  }
+  .aero-card-sheen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg) translateX(-150%);
+    transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 20;
+    pointer-events: none;
+  }
+  .aero-card-sheen:hover::after {
+    transform: skewX(-25deg) translateX(100%);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+}
