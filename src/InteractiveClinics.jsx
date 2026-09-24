@@ -127,6 +127,26 @@ export default function InteractiveClinics({ mapTexture }) {
           );
         })}
       </div>
+
+      {/* Mobile Swipe Indicators */}
+      <div className="flex lg:hidden flex-col items-center justify-center mt-[-10px] mb-6 space-y-3">
+        <div className="flex items-center space-x-1.5">
+          {CLINICS.map((clinic, index) => (
+            <button
+              key={`dot-${index}`}
+              onClick={() => setActiveClinic(clinic)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                activeClinic.id === clinic.id ? 'w-6 shadow-sm' : 'w-2 bg-slate-300'
+              }`}
+              style={activeClinic.id === clinic.id ? { background: `linear-gradient(to right, ${clinic.buttonFrom}, ${clinic.buttonTo})` } : {}}
+              aria-label={`Select ${clinic.city}`}
+            />
+          ))}
+        </div>
+        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest flex items-center">
+          ← {t('Swipe to see more', 'Desliza para ver más')} →
+        </p>
+      </div>
       
       {/* Main Dashboard Area */}
       <div className="lg:w-2/3 glass-panel rounded-[2.5rem] p-1 border-[4px] border-white shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white/50 backdrop-blur-2xl relative overflow-hidden flex flex-col">
